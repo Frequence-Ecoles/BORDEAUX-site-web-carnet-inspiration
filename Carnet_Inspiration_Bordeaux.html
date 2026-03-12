@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carnet d'Inspiration Numérique — Bordeaux</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bordeaux: #6B1A2A;
+    --bordeaux-light: #8B2A3E;
+    --bordeaux-pale: #F5EAEC;
+    --cream: #FAF7F2;
+    --ink: #1A1410;
+    --muted: #7A6E68;
+    --accent: #C4783A;
+    --accent-pale: #FDF3EA;
+    --sage: #4A6741;
+    --sage-pale: #EEF4ED;
+    --sky: #2C5F7A;
+    --sky-pale: #E8F2F8;
+    --gold: #B89A4E;
+    --border: #E0D8D0;
+    --shadow: 0 2px 12px rgba(26,20,16,0.08);
+    --shadow-lg: 0 8px 32px rgba(26,20,16,0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--bordeaux);
+    color: white;
+    padding: 28px 40px 22px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(107,26,42,0.3);
+  }
+  .header-title h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 26px;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+  }
+  .header-title h1 em {
+    font-style: italic;
+    color: #E8C4AE;
+  }
+  .header-title p {
+    font-size: 11px;
+    opacity: 0.65;
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .header-count {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 6px;
+    padding: 8px 16px;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .header-count strong {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .header-count span { font-size: 10px; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* LAYOUT */
+  .layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    min-height: calc(100vh - 90px);
+  }
+
+  /* SIDEBAR */
+  aside {
+    background: white;
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    height: calc(100vh - 90px);
+    position: sticky;
+    top: 90px;
+  }
+
+  .sidebar-header {
+    padding: 16px 20px 12px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .sidebar-header h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 14px;
+    color: var(--muted);
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+  .btn-reset {
+    font-size: 11px;
+    color: var(--bordeaux);
+    background: var(--bordeaux-pale);
+    border: none;
+    cursor: pointer;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    transition: all 0.15s;
+  }
+  .btn-reset:hover { background: var(--bordeaux); color: white; }
+
+  /* Search */
+  .search-wrap {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .search-wrap input {
+    width: 100%;
+    padding: 9px 12px 9px 34px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    background: var(--cream);
+    color: var(--ink);
+    outline: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%237A6E68' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 11px center;
+    transition: border-color 0.15s;
+  }
+  .search-wrap input:focus { border-color: var(--bordeaux); }
+
+  /* Filter groups */
+  .filter-group {
+    border-bottom: 1px solid var(--border);
+  }
+  .filter-group-header {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.1s;
+  }
+  .filter-group-header:hover { background: var(--cream); }
+  .filter-group-title {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .group-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .filter-group-arrow {
+    font-size: 10px;
+    color: var(--muted);
+    transition: transform 0.2s;
+  }
+  .filter-group.open .filter-group-arrow { transform: rotate(90deg); }
+
+  .filter-group-body {
+    display: none;
+    padding: 6px 16px 12px;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .filter-group.open .filter-group-body { display: flex; }
+
+  /* Sub-group inside filter */
+  .sub-group-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    margin: 8px 0 4px;
+    padding-left: 2px;
+    font-weight: 500;
+  }
+
+  /* Checkbox items */
+  .filter-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 4px 6px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+  .filter-item:hover { background: var(--cream); }
+  .filter-item input[type="checkbox"] { display: none; }
+  .custom-check {
+    width: 15px; height: 15px;
+    border: 1.5px solid var(--border);
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    background: white;
+  }
+  .filter-item input:checked ~ .custom-check {
+    background: var(--bordeaux);
+    border-color: var(--bordeaux);
+  }
+  .filter-item input:checked ~ .custom-check::after {
+    content: '';
+    width: 8px; height: 5px;
+    border-left: 2px solid white;
+    border-bottom: 2px solid white;
+    transform: rotate(-45deg) translate(1px,-1px);
+    display: block;
+  }
+  .filter-item-label {
+    font-size: 12px;
+    color: var(--ink);
+    line-height: 1.4;
+    flex: 1;
+  }
+  .filter-item-count {
+    font-size: 10px;
+    color: var(--muted);
+    background: var(--cream);
+    border-radius: 10px;
+    padding: 1px 6px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* MAIN */
+  main {
+    padding: 24px;
+    overflow-y: auto;
+  }
+
+  /* Active filters bar */
+  .active-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+    min-height: 0;
+  }
+  .active-filters:empty { display: none; }
+  .filter-tag {
+    background: var(--bordeaux);
+    color: white;
+    font-size: 11px;
+    padding: 4px 10px 4px 10px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    max-width: 280px;
+  }
+  .filter-tag span { 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .filter-tag button {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.7);
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+    flex-shrink: 0;
+  }
+  .filter-tag button:hover { color: white; }
+
+  /* Results meta */
+  .results-meta {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .results-meta strong { color: var(--bordeaux); }
+
+  /* CARDS GRID */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
+
+  /* CARD */
+  .card {
+    background: white;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+    display: flex;
+    flex-direction: column;
+  }
+  .card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+
+  .card-header {
+    padding: 16px 18px 12px;
+    border-bottom: 1px solid var(--border);
+    background: var(--cream);
+  }
+  .card-cycles {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .cycle-badge {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: var(--bordeaux-pale);
+    color: var(--bordeaux);
+    letter-spacing: 0.3px;
+  }
+  .card-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 3px;
+  }
+  .card-meta {
+    font-size: 11px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .card-meta span { display: flex; align-items: center; gap: 4px; }
+
+  .card-body { padding: 14px 18px; flex: 1; }
+  
+  .card-thematiques {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 10px;
+  }
+  .thematique-badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--accent-pale);
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .card-description {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+
+  .card-refs {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .ref-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+  }
+  .ref-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    font-weight: 500;
+    padding: 2px 6px;
+    border-radius: 3px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .ref-label.crcn { background: var(--sky-pale); color: var(--sky); }
+  .ref-label.prog { background: var(--sage-pale); color: var(--sage); }
+  .ref-label.socle { background: #F5F0E8; color: var(--gold); }
+
+  .ref-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+  }
+  .ref-tag {
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    line-height: 1.4;
+  }
+  .ref-tag.crcn { background: var(--sky-pale); color: var(--sky); }
+  .ref-tag.prog { background: var(--sage-pale); color: var(--sage); }
+  .ref-tag.socle { background: #F5F0E8; color: var(--gold); }
+
+  .card-footer {
+    padding: 12px 18px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .card-cost {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--ink);
+  }
+  .card-link {
+    font-size: 11px;
+    color: var(--bordeaux);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 5px 12px;
+    border: 1px solid var(--bordeaux);
+    border-radius: 5px;
+    transition: all 0.15s;
+  }
+  .card-link:hover {
+    background: var(--bordeaux);
+    color: white;
+  }
+
+  /* EMPTY STATE */
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--muted);
+    grid-column: 1/-1;
+  }
+  .empty-state p { font-size: 15px; margin-top: 8px; }
+
+  /* Scrollbar */
+  aside::-webkit-scrollbar { width: 4px; }
+  aside::-webkit-scrollbar-track { background: transparent; }
+  aside::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  @media (max-width: 768px) {
+    .layout { grid-template-columns: 1fr; }
+    aside { position: static; height: auto; max-height: 50vh; }
+    header { padding: 16px 20px; }
+    main { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-title">
+    <h1>Carnet d'<em>Inspiration</em> Numérique</h1>
+    <p>Bordeaux · Référentiel de ressources éducatives</p>
+  </div>
+  <div class="header-count">
+    <strong id="total-count">—</strong>
+    <span>produit(s) affiché(s)</span>
+  </div>
+</header>
+
+<div class="layout">
+  <aside>
+    <div class="sidebar-header">
+      <h2>Filtres</h2>
+      <button class="btn-reset" onclick="resetAll()">Tout effacer</button>
+    </div>
+
+    <div class="search-wrap">
+      <input type="text" id="search-input" placeholder="Rechercher un produit…" oninput="applyFilters()">
+    </div>
+
+    <!-- Filter groups will be injected here -->
+    <div id="filter-groups"></div>
+  </aside>
+
+  <main>
+    <div class="active-filters" id="active-filters"></div>
+    <div class="results-meta" id="results-meta"></div>
+    <div class="cards-grid" id="cards-grid"></div>
+  </main>
+</div>
+
+<script>
+// ===================== DATA =====================
+const DATA = {"products":[{"nom":"Lilémø","pays":"France","thematique":["Français et numérique"],"cycle":["Cycle 1"],"description":"Lilémø est un coffret éducatif conçu pour accompagner les enfants dans l'apprentissage de la lecture et de l'écriture. Sans écran, il propose une approche interactive et multisensorielle, combinant un ordinateur sans écran, 45 pavés connectés et 60 cartes magiques. Les activités incluent l'apprentissage des sons, l'enrichissement du vocabulaire, la phonologie et l'orthographe, le tout structuré dans un parcours pédagogique évolutif.","lien":"https://lilylearn.com/decouvrir-lilemo/","cout":"199.0","maturite":"Année de création : 2020","temps":"30 min","domaine_crcn":["Domaine 2 : Communication et collaboration"],"competences_crcn":["Interagir"],"niveau_crcn":["Niveau 1"],"prog_domaines":["Mobiliser le langage dans toutes ses dimensions"],"prog_competences":["Acquérir le langage oral","Passer de l'oral à l'écrit : se préparer à apprendre à lire"],"prog_objectifs":["Enrichir son vocabulaire","Acquérir les habiletés phonologiques et le principe alphabétique","Écouter et comprendre différentes formes d'écrits","S'éveiller à la diversité linguistique"],"socle_domaines":["Les langages pour penser et communiquer"],"socle_competences":["Langue française"]},{"nom":"Mur sonore interactif","pays":"Angleterre","thematique":["Français et numérique"],"cycle":["Cycle 1"],"description":"Le mur sonore interactif est un panneau vertical composé de 30 pochettes dans lesquelles il est possible de glisser des images, textes ou cartes. Pour chacune de ces pochettes, il est possible d'enregistrer un message de 30 secondes maximum.","lien":"https://www.easytis.com/fr/tts/3140-mur-sonore-interactif.html","cout":"58.2","maturite":"Sur le marché depuis plusieurs années, et largement utilisé.","temps":"10 min","domaine_crcn":["Domaine 2 : Communication et collaboration"],"competences_crcn":["Interagir"],"niveau_crcn":["Niveau 1"],"prog_domaines":["Mobiliser le langage dans toutes ses dimensions","Agir s'exprimer comprendre à travers l'activité physique"],"prog_competences":["Acquérir le langage oral","Passer de l'oral à l'écrit : se préparer à apprendre à lire"],"prog_objectifs":["Enrichir son vocabulaire","Acquérir les habiletés phonologiques et le principe alphabétique","Écouter et comprendre différentes formes d'écrits","S'éveiller à la diversité linguistique","Affiner son écoute"],"socle_domaines":["Les langages pour penser et communiquer","Les méthodes et outils pour apprendre"],"socle_competences":["Langue française","Outils numériques"]},{"nom":"Lulocode","pays":"France","thematique":["Mathématiques et numérique"],"cycle":["Cycle 1","Cycle 2","Cycle 3"],"description":"Lulocode est un jeu conçu pour initier les enfants à la logique informatique sans écran. À l'aide de pièces de puzzle, d'une télécommande puis d'une console, les enfants programment le trajet de Gaston, la tortue robot. La ressource est évolutive puisque trois niveaux progressifs sont disponibles en fonction de l'âge des enfants.","lien":"https://lulocode.fr/","cout":"200.0","maturite":"Année de création : 2020","temps":"30 min","domaine_crcn":["Domaine 3 : Création de contenus","Domaine 5 : Environnement numérique"],"competences_crcn":["Programmer","Résoudre des problèmes techniques"],"niveau_crcn":["Niveau 1"],"prog_domaines":["Explorer le monde","Mathématiques","Questionner le monde","Sciences et technologies"],"prog_competences":["Le repérage dans l'espace","La résolution de problèmes","Mobiliser des outils numériques"],"prog_objectifs":["Utiliser des outils numériques","Le repérage dans l'espace","La résolution de problèmes","Appliquer les principes de l'algorithmique et de la programmation par blocs pour écrire ou comprendre un code simple","Concevoir et mettre en oeuvre des expériences ou d'autres stratégies de résolution pour tester ces hypothèses"],"socle_domaines":["Les langages pour penser et communiquer","Les méthodes et outils pour apprendre","Les systèmes naturels et les systèmes techniques"],"socle_competences":["Langages mathématiques, scientifiques et informatiques","Outils numériques","Capacité à résoudre des problèmes","Approche scientifique et technique de la terre et de l'univers"]},{"nom":"Matatalab","pays":"France","thematique":["Mathématiques et numérique"],"cycle":["Cycle 3","Cycle 2"],"description":"Matatalab est un ensemble robotique qui permet d'initier les élèves dès la moyenne section aux rudiments de la programmation. Un programme, généré à partir d'une succession de commandes écrites sur des plaquettes, est ensuite transmise à un petit robot qui effectue le parcours encodé.","lien":"https://shop.matatastudio.com/products/matatastudio-coding-set","cout":"202.8","maturite":"Année de création : 2018","temps":"30 min","domaine_crcn":["Domaine 3 : Création de contenus","Domaine 5 : Environnement numérique"],"competences_crcn":["Programmer","Résoudre des problèmes techniques"],"niveau_crcn":["Niveau 1"],"prog_domaines":["Mathématiques","Sciences et technologies"],"prog_competences":["Chercher","Mobiliser des outils numériques"],"prog_objectifs":["Tester, essayer plusieurs pistes de résolution","Appliquer les principes de l'algorithmique et de la programmation par blocs pour écrire ou comprendre un code simple"],"socle_domaines":["Les langages pour penser et communiquer","Les méthodes et outils pour apprendre","Les systèmes naturels et les systèmes techniques"],"socle_competences":["Langages mathématiques, scientifiques et informatiques","Outils numériques","Capacité à résoudre des problèmes","Approche scientifique et technique de la terre et de l'univers"]},{"nom":"Code en bois","pays":"France","thematique":["Mathématiques et numérique"],"cycle":["Cycle 3"],"description":"Pour répondre aux besoins actuels en matière d'éducation débranchée, Code en Bois permet d'apprendre la programmation sans recourir aux écrans, en manipulant des briques d'instructions en bois.","lien":"https://www.codeenbois.fr/","cout":"280.0","maturite":"Année de création : 2018","temps":"30 min","domaine_crcn":["Domaine 3 : Création de contenus","Domaine 5 : Environnement numérique"],"competences_crcn":["Programmer","Résoudre des problèmes techniques"],"niveau_crcn":[],"prog_domaines":["Mathématiques","Sciences et technologies"],"prog_competences":[],"prog_objectifs":[],"socle_domaines":["Les langages pour penser et communiquer","Les méthodes et outils pour apprendre","Les systèmes naturels et les systèmes techniques"],"socle_competences":[]},{"nom":"Easi-Scope","pays":"Angleterre","thematique":["Numérique au service d'activités de découverte  de mesure et de restitution  de l'environnement"],"cycle":["Cycle 1","Cycle 2","Cycle 3"],"description":"Le microscope éducatif Easi-Scope est un outil numérique conçu pour initier les enfants à l'exploration du monde microscopique. Avec un grossissement allant jusqu'à 43x, il permet d'observer en détail des objets du quotidien.","lien":"https://www.tts-international.com/easi-scope-microscope/1010495.html","cout":"82.8","maturite":"Ce produit est largement utilisé dans les établissements scolaires.","temps":"30 min","domaine_crcn":[],"competences_crcn":["Partager et publier","Développer des documents multimédia","Construire un environnement numérique"],"niveau_crcn":[],"prog_domaines":["Mathématiques","Sciences et technologies","Questionner le monde"],"prog_competences":[],"prog_objectifs":[],"socle_domaines":[],"socle_competences":[]},{"nom":"Numetis","pays":"Angleterre","thematique":["Numérique au service d'activités de découverte  de mesure et de restitution  de l'environnement"],"cycle":["Cycle 1","Cycle 2","Cycle 3"],"description":"Le microscope Numetis est un outil éducatif permettant d'explorer le monde microscopique de manière pratique et autonome. Idéal pour des découvertes scientifiques en classe ou lors d'activités en extérieur.","lien":"https://www.easytis.com/fr/numetis/6791-microscope-autonome-numetis.html","cout":"88.8","maturite":"Année de création : inconnue","temps":"30 min","domaine_crcn":[],"competences_crcn":["Partager et publier","Développer des documents multimédia","Construire un environnement numérique"],"niveau_crcn":[],"prog_domaines":["Mathématiques","Sciences et technologies","Questionner le monde"],"prog_competences":[],"prog_objectifs":[],"socle_domaines":[],"socle_competences":[]},{"nom":"Log-box","pays":"Angleterre","thematique":["Numérique au service d'activités de découverte  de mesure et de restitution  de l'environnement"],"cycle":["Cycle 3"],"description":"Le Log-box est un outil permettant d'enregistrer et d'analyser des données en classe. Il intègre des capteurs de température, lumière et son, avec la possibilité de connecter jusqu'à trois sondes de température externes.","lien":"https://www.tts-group.co.uk/tts-log-box-data-logger/1017370.html","cout":"259.8","maturite":"Année de création : inconnue","temps":"60 min","domaine_crcn":[],"competences_crcn":["Partager et publier","Gérer des données","Traiter des données","Développer des documents multimédia","Construire un environnement numérique"],"niveau_crcn":[],"prog_domaines":[],"prog_competences":[],"prog_objectifs":[],"socle_domaines":[],"socle_competences":[]},{"nom":"Sonomètre","pays":"France","thematique":["Numérique au service d'activités de découverte  de mesure et de restitution  de l'environnement"],"cycle":["Cycle 2","Cycle 3"],"description":"Un sonomètre, également appelé décibelmètre, est un appareil utilisé pour mesurer le niveau de pression acoustique, exprimé en décibels (dB).","lien":"https://www.manomano.fr/p/sonomtre-voltcraft-sl-10-30-130-db-315-hz-8-khz-48075967","cout":"18.14","maturite":"Appareil générique, utilisé depuis plusieurs années.","temps":"10 min","domaine_crcn":[],"competences_crcn":["Traiter des données"],"niveau_crcn":[],"prog_domaines":[],"prog_competences":[],"prog_objectifs":[],"socle_domaines":[],"socle_competences":[]},{"nom":"Tableau sensoriel","pays":"Allemagne","thematique":["Éducation au numérique"],"cycle":["Cycle 1"],"description":"Ce produit éducatif est aussi appelé panneau de dextérité ou encore mur sensoriel. Il s'agit d'un grand tableau qui rassemble plusieurs objets dans le but de développer la motricité fine des petits de plus de 18 mois.","lien":"https://www.cdiscount.com/juniors/jouets-premier-age-jeux-d-eveil/ttlife-montessori-busy-board/f-1201415-aaahr45752.html","cout":"24.99","maturite":"Sur le marché depuis plusieurs années.","temps":"5 min","domaine_crcn":[],"competences_crcn":["S'insérer dans les mondes numériques"],"niveau_crcn":[],"prog_domaines":[],"prog_competences":[],"prog_objectifs":[],"socle_domaines":[],"socle_competences":[]},{"nom":"Ludinet","pays":"France","thematique":["Éducation au numérique"],"cycle":["Cycle 3"],"description":"Ludinet est un kit éducatif comportant trois activités. À travers des cartes et des livrets tangibles les élèves découvriront le fonctionnement d'Internet, des moteurs de recherche et les bases de l'identité numérique.","lien":"https://www.futur-compose.com/materiel-pedagogique/p/le-kit-ludinet","cout":"250.0","maturite":"Année de création : 2023","temps":"60 min","domaine_crcn":[],"competences_crcn":["Interagir","S'insérer dans les mondes numériques","Mener une recherche et une veille d'information","Protéger les données personnelles et la vie privée","Protéger la santé, le bien-être et l'environnement"],"niveau_crcn":[],"prog_domaines":[],"prog_competences":[],"prog_objectifs":[],"socle_domaines":[],"socle_competences":[]},{"nom":"Kidycam","pays":"Belgique","thematique":["Art sciences et numériques"],"cycle":["Cycle 1","Cycle 2","Cycle 3"],"description":"Le Kidycam de Kidywolf est un appareil photo numérique conçu pour les enfants de 3 à 12 ans. Son design ergonomique et coloré assure une prise en main optimale. Robuste et étanche jusqu'à 1 mètre de profondeur.","lien":"https://kidywolf.com/products/kidycam-rouge","cout":"69.9","maturite":"Année de création : 2022","temps":"30 min","domaine_crcn":[],"competences_crcn":["Partager et publier","Développer des documents multimédia"],"niveau_crcn":[],"prog_domaines":[],"prog_competences":[],"prog_objectifs":[],"socle_domaines":[],"socle_competences":[]},{"nom":"Makey Makey","pays":"États-Unis","thematique":["Art sciences et numériques"],"cycle":["Cycle 3"],"description":"Makey Makey est un kit d'invention qui permet de transformer presque n'importe quel objet conducteur en touche de clavier ou de souris. Il fonctionne comme un circuit imprimé qui se connecte à un ordinateur via USB.","lien":"https://makeymakey.com/","cout":"48.95","maturite":"Année de création : 2012","temps":"90 min","domaine_crcn":[],"competences_crcn":["Construire un environnement numérique"],"niveau_crcn":[],"prog_domaines":[],"prog_competences":[],"prog_objectifs":[],"socle_domaines":[],"socle_competences":[]},{"nom":"Carte micro:bit","pays":"Angleterre","thematique":["Art sciences et numériques"],"cycle":["Cycle 3"],"description":"La micro:bit est une carte électronique éducative conçue pour initier les élèves à la programmation et à l'électronique. Dotée de LED, capteurs et boutons programmables, elle permet de créer des projets interactifs.","lien":"https://microbit.org/buy/bbc-microbit-go/","cout":"28.08","maturite":"Ressource éprouvée par la communauté des enseignants.","temps":"90 min","domaine_crcn":[],"competences_crcn":["Programmer","Résoudre des problèmes techniques","Construire un environnement numérique"],"niveau_crcn":[],"prog_domaines":[],"prog_competences":[],"prog_objectifs":[],"socle_domaines":[],"socle_competences":[]},{"nom":"Boîtes enregistreuses","pays":"Angleterre","thematique":["Français et numérique","Mathématiques et numérique","Art sciences et numériques","Langues"],"cycle":["Cycle 1"],"description":"Les boîtes enregistreuses sont des outils pédagogiques interactifs polyvalents : apprendre du vocabulaire, résoudre des problèmes de maths ou encore donner des consignes. Chaque boîte permet d'enregistrer jusqu'à 45 secondes de son.","lien":"https://www.my-etechno.com/tts-audio/1875-lot-de-6-big-point-bouton-enregistreur.html","cout":"117.6","maturite":"Sur le marché depuis plusieurs années.","temps":"10 min","domaine_crcn":[],"competences_crcn":["Développer des documents multimédia"],"niveau_crcn":[],"prog_domaines":[],"prog_competences":[],"prog_objectifs":[],"socle_domaines":[],"socle_competences":[]},{"nom":"Table lumineuse","pays":"Non spécifié","thematique":["Français et numérique","Art sciences et numériques","Numérique au service d'activités de découverte  de mesure et de restitution  de l'environnement"],"cycle":["Cycle 1"],"description":"Les tables lumineuses sont des surfaces rétroéclairées permettant aux enfants d'explorer la lumière, les couleurs, les formes et les textures de manière ludique et sensorielle.","lien":"https://www.fnac.com/informatique/tablette-lumineuse/q","cout":"30.0","maturite":"Année de création : 1960-1970","temps":"10 min","domaine_crcn":[],"competences_crcn":["Interagir"],"niveau_crcn":[],"prog_domaines":[],"prog_competences":[],"prog_objectifs":[],"socle_domaines":[],"socle_competences":[]},{"nom":"Carreaux intelligents","pays":"Angleterre","thematique":["Français et numérique","Mathématiques et numérique","Art sciences et numériques","Langues"],"cycle":["Cycle 1","Cycle 2","Cycle 3"],"description":"Les boutons enregistreurs favorisent l'apprentissage du langage. Grâce à leur fonction d'enregistrement vocal et leur surface inscriptible effaçable, ils permettent d'associer sons, mots et images.","lien":"https://www.manutan-collectivites.fr/product/carreaux-intelligents-tts-itg7433799.html","cout":"142.9","maturite":"Sur le marché depuis plusieurs années.","temps":"10 min","domaine_crcn":[],"competences_crcn":["Développer des documents multimédia"],"niveau_crcn":[],"prog_domaines":[],"prog_competences":[],"prog_objectifs":[],"socle_domaines":[],"socle_competences":[]},{"nom":"Yoli","pays":"Danemark","thematique":["Français et numérique","Mathématiques et numérique","Art sciences et numériques","Langues"],"cycle":["Cycle 1"],"description":"YOLI associe un tableau électronique intelligent à des tuiles de jeu physiques, offrant une expérience sensorielle et kinesthésique sans l'usage d'écran.","lien":"https://www.playyoli.com/a_landingpage/1740476659449x320209058536562400","cout":"266.4","maturite":"Sur le marché depuis plusieurs années.","temps":"30 min","domaine_crcn":[],"competences_crcn":["Interagir"],"niveau_crcn":[],"prog_domaines":[],"prog_competences":[],"prog_objectifs":[],"socle_domaines":[],"socle_competences":[]},{"nom":"Robot Achoka","pays":"Luxembourg","thematique":["Français et numérique","Mathématiques et numérique","Art sciences et numériques","Langues"],"cycle":["Cycle 1","Cycle 2"],"description":"Ce robot d'apprentissage est simple d'utilisation pour les 3 à 8 ans. Il parle 4 langues, raconte une histoire, joue de la musique, se déplace sur un plateau de jeux.","lien":"https://www.chapierschool.lu/","cout":"79.2","maturite":"Activités élaborées avec des enseignants.","temps":"30 min","domaine_crcn":[],"competences_crcn":["Programmer","Interagir"],"niveau_crcn":[],"prog_domaines":[],"prog_competences":[],"prog_objectifs":[],"socle_domaines":[],"socle_competences":[]},{"nom":"Ardoise parlante","pays":"Angleterre","thematique":["Français et numérique","Mathématiques et numérique","Art sciences et numériques","Langues"],"cycle":["Cycle 1","Cycle 2","Cycle 3"],"description":"Les cartes ardoises TalkTime A4 permettent d'écrire et d'enregistrer des messages audio de 60 secondes. Les élèves peuvent les utiliser pour s'exprimer, mémoriser des informations ou s'entraîner.","lien":"https://www.tts-international.com/premium-recordable-talk-time-cards/1009826.html","cout":"57.9","maturite":"Sur le marché depuis plusieurs années.","temps":"10 min","domaine_crcn":[],"competences_crcn":["Interagir","Développer des documents multimédia"],"niveau_crcn":[],"prog_domaines":[],"prog_competences":[],"prog_objectifs":[],"socle_domaines":[],"socle_competences":[]},{"nom":"Album photo numérique","pays":"Angleterre","thematique":["Français et numérique","Mathématiques et numérique","Art sciences et numériques","Langues"],"cycle":["Cycle 1"],"description":"L'Album photo parlant A4 permet d'enregistrer des messages audio que l'on associe à des photos dans des pochettes plastiques. Les élèves peuvent enregistrer et écouter des commentaires en lien avec les images.","lien":"https://www.tts-group.co.uk/tts-a4-talking-recordable-photo-albums/1005662.html","cout":"87.0","maturite":"Sur le marché depuis plusieurs années.","temps":"10 min","domaine_crcn":[],"competences_crcn":["Interagir","Développer des documents multimédia"],"niveau_crcn":[],"prog_domaines":[],"prog_competences":[],"prog_objectifs":[],"socle_domaines":[],"socle_competences":[]},{"nom":"Buzzers","pays":"Non spécifié","thematique":["Français et numérique","Mathématiques et numérique","Éducation au numérique","Art sciences et numériques","Langues"],"cycle":["Cycle 1","Cycle 2","Cycle 3"],"description":"Les buzzers sont des dispositifs conçus pour rendre l'apprentissage et les activités de groupe plus dynamiques et engageantes.","lien":"https://espace-inclusif.fr/jeux-sonores/640-buzzers-lumineux-et-sonores-765023837766.html","cout":"26.9","maturite":"Sur le marché depuis plusieurs années.","temps":"5 min","domaine_crcn":[],"competences_crcn":["Interagir"],"niveau_crcn":[],"prog_domaines":[],"prog_competences":[],"prog_objectifs":[],"socle_domaines":[],"socle_competences":[]}],"prog_ref":{"Acquérir les premiers outils mathématiques":{"cycles":["Cycle 1"],"objectifs_globaux":["Découvrir les nombres","Explorer des grandeurs : la longueur la masse","Explorer les solides et les formes planes","Se familiariser avec les motifs organisés","Utiliser les nombres pour résoudre des problèmes"]},"Agir s'exprimer comprendre à travers l'activité physique":{"cycles":["Cycle 1"],"objectifs_globaux":["Adapter ses équilibres et ses déplacements à des environnements ou des contraintes variés","Agir dans l'espace dans la durée et sur les objets","Collaborer coopérer s'opposer","Communiquer avec les autres au travers d'actions à visée expressive ou artistique"]},"Agir s'exprimer comprendre à travers les activités artistiques":{"cycles":["Cycle 1"],"objectifs_globaux":["Affiner son écoute","Dessiner","Découvrir différentes formes d'expression artistique","Développer du goût pour les pratiques artistiques","Explorer des instruments utiliser les sonorités du corps","Jouer avec sa voix et acquérir un répertoire de comptines et de chansons","Observer comprendre et transformer des images","Pratiquer quelques activités des arts du spectacle vivant","Réaliser des compositions plastiques planes et en volume","S'exercer au graphisme décoratif","Vivre et exprimer des émotions formuler des choix"]},"Arts plastiques":{"cycles":["Cycle 2","Cycle 3"],"objectifs_globaux":["Expérimenter, produire, créer","Mettre en oeuvre un projet artistique","Se repérer dans les domaines liés aux arts plastiques","S'exprimer, analyser sa pratique"]},"Éducation musicale":{"cycles":["Cycle 2","Cycle 3"],"objectifs_globaux":["Chanter","Chanter et interpréter","Explorer et imaginer","Échanger, partager","Écouter, comparer"]},"Éducation physique et sportive":{"cycles":["Cycle 2","Cycle 3"],"objectifs_globaux":["Apprendre à entretenir sa santé par une activité physique régulière","Développer sa motricité et construire un langage du corps","Partager des règles, assumer des rôles et des responsabilités","S'approprier une culture physique sportive et artistique"]},"Enseignement moral et civique":{"cycles":["Cycle 2","Cycle 3"],"objectifs_globaux":["Altérité et sociabilité","Apprendre à vivre dans une société démocratique","Connaissance et maîtrise de soi","Faire société","La république et son fonctionnement","Les règles collectives et l'autonomie","L'engagement pour le bien commun"]},"Explorer le monde":{"cycles":["Cycle 1"],"objectifs_globaux":["Explorer le monde du vivant, des objets et de la matière","Le temps","L'espace"]},"Français":{"cycles":["Cycle 2","Cycle 3"],"objectifs_globaux":["Comprendre et s'exprimer à l'oral","Comprendre le fonctionnement de la langue","Grammaire et orthographe","Lecture","Lire","Oral","Vocabulaire","Écrire","Écriture"]},"Histoire des arts":{"cycles":["Cycle 3"],"objectifs_globaux":["Analyser","Identifier","Se repérer","Situer"]},"Histoire et géographie":{"cycles":["Cycle 3"],"objectifs_globaux":["Comprendre un document","Coopérer et mutualiser","Pratiquer différents langages","Raisonner, justifier une démarche","Se repérer dans le temps","Se repérer dans l'espace","S'informer dans le monde du numérique"]},"Langues vivantes (étrangères ou régionales)":{"cycles":["Cycle 2","Cycle 3"],"objectifs_globaux":["Comprendre l'oral","Découvrir les aspects culturels d'une langue vivante","Lire et comprendre","Parler en continu","Prendre part à une conversation","Réagir et dialoguer","Écouter et comprendre","Écrire"]},"Mathématiques":{"cycles":["Cycle 2","Cycle 3"],"objectifs_globaux":["Calculer","Chercher","Communiquer","La géométrie plane","La résolution de problèmes","Le calcul mental","Le repérage dans l'espace","Les nombres entiers","Modéliser","Organisation et gestion de données","Raisonner","Représenter"]},"Mobiliser le langage dans toutes ses dimensions":{"cycles":["Cycle 1"],"objectifs_globaux":["Acquérir le langage oral","Passer de l'oral à l'écrit : se préparer à apprendre à lire","Passer de l'oral à l'écrit : se préparer à apprendre à écrire"]},"Questionner le monde":{"cycles":["Cycle 2"],"objectifs_globaux":["Adopter un comportement éthique et responsable","Imaginer, réaliser","Mobiliser des outils numériques","Pratiquer des démarches scientifiques","Pratiquer des langages","Se situer dans l'espace et le temps","S'approprier des outils et des méthodes"]},"Sciences et technologies":{"cycles":["Cycle 3"],"objectifs_globaux":["Adopter un comportement éthique et responsable","Concevoir, créer, réaliser","Faire preuve d'esprit critique","Mobiliser des outils numériques","Pratiquer des démarches scientifiques et technologiques","Pratiquer des langages","Se situer dans l'espace et dans le temps"]}},"crcn_ref":{"Informations et données":["Gérer des données","Mener une recherche et une veille d'information","Traiter des données"],"Communication et collaboration":["Collaborer","Interagir","Partager et publier","S'insérer dans le monde numérique"],"Création de contenus":["Adapter les documents à leur finalité","Développer des documents multimédia","Développer des documents textuels","Programmer"],"Protection et sécurité":["Protéger la santé, le bien-être et l'environnement","Protéger les données personnelles et la vie privée","Sécuriser l'environnement numérique"],"Environnement numérique":["Construire un environnement numérique","Résoudre des problèmes techniques"]},"socle_ref":{"Les langages pour penser et communiquer":["Langages des arts et du corps","Langages mathématiques, scientifiques et informatiques","Langes vivantes étrangères ou régionales","Langue française"],"Les méthodes et outils pour apprendre":["Accès à l'information et à la documentation","Conduite de projets individuels et collectifs","Organisation des apprentissages","Outils numériques"],"La formation de la personne et du citoyen":["Apprentissage de la vie en société, de l'action collective et de la citoyenneté","Formation morale et civique","Respect des choix personnels et des responsabilités individuelles"],"Les systèmes naturels et les systèmes techniques":["Approche scientifique et technique de la terre et de l'univers","Capacité à résoudre des problèmes","Curiosité et sens de l'observation"],"Les représentations du monde et de l'activité humaine":["Compréhension des sociétés dans le temps et dans l'espace","Connaissance du monde social contemporain","Interprétation des productions culturelles humaines"]}};
+
+// ===================== FILTER DEFINITIONS =====================
+const FILTERS = [
+  {
+    id: 'cycle', label: 'Cycle', color: '#6B1A2A',
+    type: 'flat',
+    field: 'cycle',
+    options: ['Cycle 1','Cycle 2','Cycle 3']
+  },
+  {
+    id: 'thematique', label: 'Thématique', color: '#C4783A',
+    type: 'flat',
+    field: 'thematique',
+    options: ['Art sciences et numériques','Français et numérique','Langues','Mathématiques et numérique',"Numérique au service d'activités de découverte  de mesure et de restitution  de l'environnement",'Éducation au numérique']
+  },
+  {
+    id: 'crcn', label: 'CRCN', color: '#2C5F7A',
+    type: 'grouped',
+    groups: Object.entries(DATA.crcn_ref).map(([g, vals]) => ({
+      label: g,
+      field: 'competences_crcn',
+      options: vals
+    }))
+  },
+  {
+    id: 'prog', label: 'Programme scolaire', color: '#4A6741',
+    type: 'grouped',
+    groups: Object.entries(DATA.prog_ref).map(([g, info]) => ({
+      label: g + (info.cycles ? '  —  ' + info.cycles.join(', ') : ''),
+      field: 'prog_domaines',
+      singleValue: g,
+      subOptions: info.objectifs_globaux ? info.objectifs_globaux.map(o => ({ field: 'prog_objectifs', value: o })) : []
+    }))
+  },
+  {
+    id: 'socle', label: 'Socle commun', color: '#B89A4E',
+    type: 'grouped',
+    groups: Object.entries(DATA.socle_ref).map(([g, vals]) => ({
+      label: g,
+      field: 'socle_domaines',
+      singleValue: g,
+      subOptions: vals.map(v => ({ field: 'socle_competences', value: v }))
+    }))
+  }
+];
+
+// ===================== STATE =====================
+let activeFilters = new Set(); // each item: "groupId|field|value"
+let searchText = '';
+
+// ===================== BUILD SIDEBAR =====================
+function buildSidebar() {
+  const container = document.getElementById('filter-groups');
+  FILTERS.forEach(f => {
+    const group = document.createElement('div');
+    group.className = 'filter-group';
+    group.id = 'fg-' + f.id;
+
+    const header = document.createElement('div');
+    header.className = 'filter-group-header';
+    header.innerHTML = `
+      <div class="filter-group-title">
+        <span class="group-dot" style="background:${f.color}"></span>
+        ${f.label}
+      </div>
+      <span class="filter-group-arrow">▶</span>
+    `;
+    header.onclick = () => { group.classList.toggle('open'); };
+
+    const body = document.createElement('div');
+    body.className = 'filter-group-body';
+
+    if (f.type === 'flat') {
+      f.options.forEach(opt => {
+        body.appendChild(makeCheckbox(f.id, f.field, opt, opt, f.color));
+      });
+    } else if (f.type === 'grouped') {
+      f.groups.forEach(grp => {
+        if (grp.singleValue !== undefined) {
+          // Domain-level checkbox
+          const domLabel = document.createElement('div');
+          domLabel.className = 'sub-group-label';
+          domLabel.textContent = grp.label.split('  —  ')[0];
+          if (grp.label.includes('—')) {
+            const cycleSpan = document.createElement('span');
+            cycleSpan.style.cssText = 'color:#B89A4E;font-size:9px;margin-left:4px;';
+            cycleSpan.textContent = grp.label.split('  —  ')[1];
+            domLabel.appendChild(cycleSpan);
+          }
+          body.appendChild(domLabel);
+          body.appendChild(makeCheckbox(f.id, grp.field, grp.singleValue, grp.singleValue, f.color));
+          // Sub-options (objectifs)
+          if (grp.subOptions && grp.subOptions.length > 0) {
+            const subWrap = document.createElement('div');
+            subWrap.style.cssText = 'padding-left:12px;';
+            grp.subOptions.forEach(sub => {
+              subWrap.appendChild(makeCheckbox(f.id, sub.field, sub.value, sub.value, f.color, true));
+            });
+            body.appendChild(subWrap);
+          }
+        } else {
+          // CRCN style: group label + competences
+          const domLabel = document.createElement('div');
+          domLabel.className = 'sub-group-label';
+          domLabel.textContent = grp.label;
+          body.appendChild(domLabel);
+          grp.options.forEach(opt => {
+            body.appendChild(makeCheckbox(f.id, grp.field, opt, opt, f.color));
+          });
+        }
+      });
+    }
+
+    group.appendChild(header);
+    group.appendChild(body);
+    container.appendChild(group);
+  });
+}
+
+function makeCheckbox(groupId, field, value, displayLabel, color, small = false) {
+  const key = `${groupId}|${field}|${value}`;
+  const label = document.createElement('label');
+  label.className = 'filter-item';
+  label.style.cssText = small ? 'opacity:0.85;' : '';
+
+  // Count matching products
+  const count = DATA.products.filter(p => p.nom && (p[field] || []).includes(value)).length;
+
+  label.innerHTML = `
+    <input type="checkbox" data-key="${key}" onchange="toggleFilter(this)">
+    <span class="custom-check"></span>
+    <span class="filter-item-label" style="font-size:${small?'11px':'12px'}">${displayLabel}</span>
+    <span class="filter-item-count">${count}</span>
+  `;
+  return label;
+}
+
+// ===================== FILTER LOGIC =====================
+function toggleFilter(checkbox) {
+  const key = checkbox.dataset.key;
+  if (checkbox.checked) {
+    activeFilters.add(key);
+  } else {
+    activeFilters.delete(key);
+  }
+  applyFilters();
+}
+
+function resetAll() {
+  activeFilters.clear();
+  document.querySelectorAll('.filter-item input[type="checkbox"]').forEach(cb => cb.checked = false);
+  document.getElementById('search-input').value = '';
+  searchText = '';
+  applyFilters();
+}
+
+function removeFilter(key) {
+  activeFilters.delete(key);
+  const cb = document.querySelector(`input[data-key="${CSS.escape(key)}"]`);
+  if (cb) cb.checked = false;
+  applyFilters();
+}
+
+function applyFilters() {
+  searchText = document.getElementById('search-input').value.toLowerCase().trim();
+
+  // Group active filters by groupId for OR within group, AND between groups
+  const byGroup = {};
+  for (const key of activeFilters) {
+    const [gId, field, value] = key.split('|');
+    if (!byGroup[gId]) byGroup[gId] = [];
+    byGroup[gId].push({ field, value });
+  }
+
+  const filtered = DATA.products.filter(p => {
+    if (!p.nom) return false;
+
+    // Search
+    if (searchText) {
+      const haystack = [p.nom, p.description, p.pays, ...p.thematique, ...p.cycle,
+        ...p.competences_crcn, ...p.prog_domaines, ...p.socle_domaines].join(' ').toLowerCase();
+      if (!haystack.includes(searchText)) return false;
+    }
+
+    // Each group: product must match at least one filter in the group (OR within group)
+    for (const [gId, conditions] of Object.entries(byGroup)) {
+      const match = conditions.some(({ field, value }) => (p[field] || []).includes(value));
+      if (!match) return false;
+    }
+    return true;
+  });
+
+  renderCards(filtered);
+  renderActiveTags();
+  document.getElementById('total-count').textContent = filtered.length;
+  document.getElementById('results-meta').innerHTML = filtered.length === DATA.products.filter(p=>p.nom).length
+    ? `<strong>${filtered.length}</strong> produits affichés`
+    : `<strong>${filtered.length}</strong> produit(s) sur ${DATA.products.filter(p=>p.nom).length} correspondent aux filtres`;
+}
+
+// ===================== RENDER TAGS =====================
+function renderActiveTags() {
+  const container = document.getElementById('active-filters');
+  container.innerHTML = '';
+  for (const key of activeFilters) {
+    const parts = key.split('|');
+    const value = parts.slice(2).join('|');
+    const tag = document.createElement('div');
+    tag.className = 'filter-tag';
+    tag.innerHTML = `<span title="${value}">${value}</span><button onclick="removeFilter('${key.replace(/'/g,"\\'")}')">×</button>`;
+    container.appendChild(tag);
+  }
+}
+
+// ===================== RENDER CARDS =====================
+function renderCards(products) {
+  const grid = document.getElementById('cards-grid');
+  grid.innerHTML = '';
+
+  if (!products.length) {
+    grid.innerHTML = `<div class="empty-state">
+      <div style="font-size:40px">🔍</div>
+      <p>Aucun produit ne correspond à ces critères.</p>
+      <button class="btn-reset" onclick="resetAll()" style="margin-top:12px;font-size:12px;padding:8px 16px">Effacer les filtres</button>
+    </div>`;
+    return;
+  }
+
+  products.forEach(p => {
+    const cost = parseFloat(p.cout);
+    const costStr = isNaN(cost) ? (p.cout || '—') : cost.toFixed(2).replace('.',',') + ' €';
+
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="card-header">
+        <div class="card-cycles">${(p.cycle||[]).map(c=>`<span class="cycle-badge">${c}</span>`).join('')}</div>
+        <div class="card-name">${p.nom}</div>
+        <div class="card-meta">
+          <span>🌍 ${p.pays}</span>
+          ${p.temps ? `<span>⏱ ${p.temps}</span>` : ''}
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-thematiques">${(p.thematique||[]).map(t=>`<span class="thematique-badge">${t.length>45?t.substring(0,43)+'…':t}</span>`).join('')}</div>
+        <div class="card-description">${p.description}</div>
+        <div class="card-refs">
+          ${p.competences_crcn && p.competences_crcn.length ? `
+          <div class="ref-row">
+            <span class="ref-label crcn">CRCN</span>
+            <div class="ref-tags">${p.competences_crcn.map(c=>`<span class="ref-tag crcn">${c}</span>`).join('')}</div>
+          </div>` : ''}
+          ${p.prog_domaines && p.prog_domaines.length ? `
+          <div class="ref-row">
+            <span class="ref-label prog">Programme</span>
+            <div class="ref-tags">${p.prog_domaines.map(c=>`<span class="ref-tag prog">${c.length>40?c.substring(0,38)+'…':c}</span>`).join('')}</div>
+          </div>` : ''}
+          ${p.socle_domaines && p.socle_domaines.length ? `
+          <div class="ref-row">
+            <span class="ref-label socle">Socle</span>
+            <div class="ref-tags">${p.socle_domaines.map(c=>`<span class="ref-tag socle">${c.length>40?c.substring(0,38)+'…':c}</span>`).join('')}</div>
+          </div>` : ''}
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="card-cost">${costStr}</span>
+        ${p.lien && p.lien.startsWith('http') ? `<a class="card-link" href="${p.lien}" target="_blank">Voir la ressource ↗</a>` : ''}
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// ===================== INIT =====================
+buildSidebar();
+applyFilters();
+// Open first group by default
+document.querySelector('.filter-group').classList.add('open');
+</script>
+</body>
+</html>
